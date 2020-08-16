@@ -56,14 +56,10 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("nickname").click()
         wd.find_element_by_name("nickname").clear()
         wd.find_element_by_name("nickname").send_keys(contact.nickname)
-        #photo - файл на диске С
-        #wd.find_element_by_name("photo").click()
-        #wd.find_element_by_name("photo").clear()
-        #wd.find_element_by_name("photo").send_keys("C:\\photo.jpg")
-        #photo - файл в папке проекта
-        #wd.find_element_by_name("photo").click()
-        #wd.find_element_by_name("photo").clear()
-        #wd.find_element_by_name("photo").send_keys("photo.jpg")
+        # photo
+        wd.find_element_by_name("photo").clear()
+        wd.find_element_by_name("photo").send_keys("C:\photo.jpg")
+
         # title
         wd.find_element_by_name("title").click()
         wd.find_element_by_name("title").clear()
