@@ -19,7 +19,12 @@ class TestAddContact(unittest.TestCase):
         self.open_home_page(wd)
         self.login(wd, username="admin", password="secret")
         self.init_contact_creation(wd)
-        self.fill_contact_form(wd)
+        self.fill_contact_form(wd, name="test_name", middle_name="test_middle_name", surname="test_surname",
+                               nickname="test_nickname", company="test_company", title="test_title",
+                               telephone_home="79111111111", telephone_mobile="79222222222", telephone_work="", fax="",
+                               email1="test@test.ru", email2="", email3="", homepage="test.com", bday="9",
+                               bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000", address="address",
+                               home="home", note="test")
         self.submit_contact_creation(wd)
         self.return_to_home_page(wd)
         self.logout(wd)
@@ -33,12 +38,9 @@ class TestAddContact(unittest.TestCase):
     def submit_contact_creation(self, wd):
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def fill_contact_form(self, wd, name="test_name", middle_name="test_middle_name", surname="test_surname",
-                          nickname="test_nickname", adress="test_address", company="test_company", title="test_title",
-                          telephone_home="79111111111", telephone_mobile="79222222222", telephone_work="", fax="",
-                          email1="test@test.ru", email2="", email3="", homepage="test.com",
-                          bday="9", bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000",
-                          address="address", home="home", note="test"):
+    def fill_contact_form(self, wd, name, middle_name, surname, nickname, company, title, telephone_home,
+                          telephone_mobile, telephone_work, fax, email1, email2, email3, homepage, bday, bmonth, byear,
+                          aday, amonth, ayear, address, home, note):
         # firstname
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -74,7 +76,7 @@ class TestAddContact(unittest.TestCase):
         # address
         wd.find_element_by_name("address").click()
         wd.find_element_by_name("address").clear()
-        wd.find_element_by_name("address").send_keys(adress)
+        wd.find_element_by_name("address").send_keys(address)
         # home telephone
         wd.find_element_by_name("home").click()
         wd.find_element_by_name("home").clear()
