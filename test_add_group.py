@@ -1,5 +1,4 @@
 # -*- coding: utf-8 -*-
-from selenium import webdriver
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import NoAlertPresentException
 import unittest
@@ -21,6 +20,8 @@ class TestAddGroup(unittest.TestCase):
         self.create_group(Group(name="", header="", footer=""))
         self.logout()
 
+    def tearDown(self):
+        self.app.destroy()
 
     def is_element_present(self, how, what):
         try:
@@ -35,9 +36,6 @@ class TestAddGroup(unittest.TestCase):
         except NoAlertPresentException as e:
             return False
         return True
-
-    def tearDown(self):
-        self.wd.quit()
 
 
 if __name__ == "__main__":
