@@ -16,8 +16,7 @@ class TestAddContact(unittest.TestCase):
         self.accept_next_alert = True
 
     def test_add_contact(self):
-        wd = self.wd
-        self.login(wd, username="admin", password="secret")
+        self.login(username="admin", password="secret")
         self.init_contact_creation(wd)
         self.fill_contact_form(wd, Contact(name="test_name", middle_name="test_middle_name", surname="test_surname",
                                nickname="test_nickname", company="test_company", title="test_title",
@@ -25,20 +24,24 @@ class TestAddContact(unittest.TestCase):
                                email1="test@test.ru", email2="", email3="", homepage="test.com", bday="9",
                                bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000", address="address",
                                home="home", note="test"))
-        self.submit_contact_creation(wd)
-        self.return_to_home_page(wd)
-        self.logout(wd)
+        self.submit_contact_creation()
+        self.return_to_home_page()
+        self.logout()
 
-    def logout(self, wd):
+    def logout(self):
+        wd = self.wd
         wd.find_element_by_link_text("Logout").click()
 
-    def return_to_home_page(self, wd):
+    def return_to_home_page(self):
+        wd = self.wd
         wd.find_element_by_link_text("home page").click()
 
-    def submit_contact_creation(self, wd):
+    def submit_contact_creation(self):
+        wd = self.wd
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def fill_contact_form(self, wd, contact):
+    def fill_contact_form(self, contact):
+        wd = self.wd
         # firstname
         wd.find_element_by_name("firstname").click()
         wd.find_element_by_name("firstname").clear()
@@ -136,14 +139,17 @@ class TestAddContact(unittest.TestCase):
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.note)
 
-    def init_contact_creation(self, wd):
+    def init_contact_creation(self):
+        wd = self.wd
         wd.find_element_by_link_text("add new").click()
 
-    def open_home_page(self, wd):
+    def open_home_page(self):
+        wd = self.wd
         wd.get("http://localhost/addressbook/")
 
-    def login(self, wd, username, password):
-        self.open_home_page(wd)
+    def login(self, username, password):
+        wd = self.wd
+        self.open_home_page()
         wd.find_element_by_name("user").clear()
         wd.find_element_by_name("user").send_keys(username)
         wd.find_element_by_name("pass").click()
