@@ -11,14 +11,14 @@ class TestAddGroup(unittest.TestCase):
         self.app = Application()
 
     def test_add_group(self):
-        self.login(username="admin", password="secret")
-        self.create_group(Group(name="test", header="test", footer="test"))
-        self.logout()
+        self.app.login(username="admin", password="secret")
+        self.app.create_group(Group(name="test", header="test", footer="test"))
+        self.app.logout()
 
     def test_add_empty_group(self):
-        self.login(username="admin", password="secret")
-        self.create_group(Group(name="", header="", footer=""))
-        self.logout()
+        self.app.login(username="admin", password="secret")
+        self.app.create_group(Group(name="", header="", footer=""))
+        self.app.logout()
 
     def tearDown(self):
         self.app.destroy()
