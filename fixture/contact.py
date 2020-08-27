@@ -1,5 +1,7 @@
 from selenium.webdriver.support.select import Select
 
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -116,7 +118,17 @@ class ContactHelper:
     def del_first_contact(self):
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
-        #wd.find_element_by_id("1").click() - вариант из каталона
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
 
+    def edit_first_contact(self):
+        wd = self.app.wd
+        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        self.fill_contact_form(Contact(name="test_name", middle_name="test_middle_name", surname="test_surname",
+                           nickname="test_nickname", company="test_company", title="test_title",
+                           telephone_home="79111111111", telephone_mobile="79222222222", telephone_work="", fax="",
+                           email1="test@test.ru", email2="", email3="", homepage="test.com", bday="9",
+                           bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000", address="address",
+                           home="home", note="edit test"))
+        wd.find_element_by_name("update").click()
+        self.app.return_to_home_page()
