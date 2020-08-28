@@ -1,5 +1,7 @@
-def test_delete_first_group(app):
-    app.session.login(username="admin", password="secret")
-    app.contact.del_first_contact()
-    app.session.logout()
+from fixture.application import Application
+
+def test_delete_first_contact(app):
+    app.contact.test_delete_first_contact()
+    app.return_to_home_page()
+
 
