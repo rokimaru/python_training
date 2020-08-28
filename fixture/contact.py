@@ -8,11 +8,11 @@ class ContactHelper:
     def __init__(self, app):
         self.app = app
 
-    def init_contact_creation(self):
+    def init_creation(self):
         wd = self.app.wd
         wd.find_element_by_link_text("add new").click()
 
-    def fill_contact_form(self, contact):
+    def edit_fields(self, contact):
         wd = self.app.wd
         # firstname
         wd.find_element_by_name("firstname").click()
@@ -111,24 +111,16 @@ class ContactHelper:
         wd.find_element_by_name("notes").clear()
         wd.find_element_by_name("notes").send_keys(contact.note)
 
-    def submit_contact_creation(self):
+    def submit_creation(self):
         wd = self.app.wd
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
 
-    def del_first_contact(self):
-        wd = self.app.wd
-        wd.find_element_by_name("selected[]").click()
-        wd.find_element_by_xpath("//input[@value='Delete']").click()
-        wd.switch_to_alert().accept()
-
-    def edit_first_contact(self):
+    def init_edition(self):
         wd = self.app.wd
         wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
-        self.fill_contact_form(Contact(name="test_name", middle_name="test_middle_name", surname="test_surname",
-                           nickname="test_nickname", company="test_company", title="test_title",
-                           telephone_home="79111111111", telephone_mobile="79222222222", telephone_work="", fax="",
-                           email1="test@test.ru", email2="", email3="", homepage="test.com", bday="9",
-                           bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000", address="address",
-                           home="home", note="edit test"))
+
+    def submit_edition(self):
+        wd = self.app.wd
         wd.find_element_by_name("update").click()
         self.app.return_to_home_page()
+
