@@ -1,3 +1,5 @@
+import time
+
 from selenium.webdriver.support.select import Select
 
 
@@ -28,31 +30,31 @@ class ContactHelper:
         self.change_field_value("email2", contact.email2)
         self.change_field_value("email3", contact.email3)
         self.change_field_value("homepage", contact.homepage)
-        # birthday
-        wd.find_element_by_name("bday").click()
-        Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
-        wd.find_element_by_name("bday").click()
-        wd.find_element_by_name("bmonth").click()
-        Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
-        wd.find_element_by_name("bmonth").click()
-        wd.find_element_by_name("byear").click()
-        wd.find_element_by_name("byear").clear()
-        wd.find_element_by_name("byear").send_keys(contact.byear)
-        # anniversary
-        wd.find_element_by_name("aday").click()
-        Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
-        wd.find_element_by_name("aday").click()
-        wd.find_element_by_name("amonth").click()
-        Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
-        wd.find_element_by_name("amonth").click()
-        wd.find_element_by_name("ayear").click()
-        wd.find_element_by_name("ayear").clear()
-        # self.change_date_value("bday", contact.bday)
-        # self.change_date_value("bmonth", contact.bmonth)
-        # self.change_date_value("byear", contact.byear)
-        # self.change_date_value("aday", contact.aday)
-        # self.change_date_value("amonth", contact.amonth)
-        # self.change_date_value("ayear", contact.ayear)
+        # # birthday
+        # wd.find_element_by_name("bday").click()
+        # Select(wd.find_element_by_name("bday")).select_by_visible_text(contact.bday)
+        # wd.find_element_by_name("bday").click()
+        # wd.find_element_by_name("bmonth").click()
+        # Select(wd.find_element_by_name("bmonth")).select_by_visible_text(contact.bmonth)
+        # wd.find_element_by_name("bmonth").click()
+        # wd.find_element_by_name("byear").click()
+        # wd.find_element_by_name("byear").clear()
+        # wd.find_element_by_name("byear").send_keys(contact.byear)
+        # # anniversary
+        # wd.find_element_by_name("aday").click()
+        # Select(wd.find_element_by_name("aday")).select_by_visible_text(contact.aday)
+        # wd.find_element_by_name("aday").click()
+        # wd.find_element_by_name("amonth").click()
+        # Select(wd.find_element_by_name("amonth")).select_by_visible_text(contact.amonth)
+        # wd.find_element_by_name("amonth").click()
+        # wd.find_element_by_name("ayear").click()
+        # wd.find_element_by_name("ayear").clear()
+        self.change_date_value("bday", contact.bday)
+        self.change_date_value("bmonth", contact.bmonth)
+        self.change_date_value("byear", contact.byear)
+        self.change_date_value("aday", contact.aday)
+        self.change_date_value("amonth", contact.amonth)
+        self.change_date_value("ayear", contact.ayear)
         self.change_field_value("home", contact.home)
         self.change_field_value("notes", contact.note)
 
@@ -61,12 +63,12 @@ class ContactHelper:
         wd.find_element_by_name("photo").clear()
         wd.find_element_by_name("photo").send_keys("C:\photo.jpg")
 
-    # def change_date_value(self, field_name, value):
-    #     wd = self.app.wd
-    #     if value is not None:
-    #         wd.find_element_by_name(field_name).click()
-    #         Select(wd.find_element_by_name(field_name)).select_by_visible_text(value)
-    #         wd.find_element_by_name(field_name).click()
+    def change_date_value(self, field_name, value):
+        wd = self.app.wd
+        if value is not None:
+            wd.find_element_by_name(field_name).click()
+            Select(wd.find_element_by_name(field_name)).select_by_visible_text(value)
+            wd.find_element_by_name(field_name).click()
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -96,7 +98,9 @@ class ContactHelper:
 
     def edit(self, new_contact_data):
         self.init_edition()
+        time.sleep(2)
         self.edit_fields(new_contact_data)
+        time.sleep(2)
         self.submit_edition()
 
     def count(self):
@@ -105,6 +109,7 @@ class ContactHelper:
 
     def del_first_contact(self):
         wd = self.app.wd
+        self.app.open_home_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
