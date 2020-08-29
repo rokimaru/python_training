@@ -2,13 +2,10 @@ from model.contact import Contact
 
 
 def test_edit_contact(app):
+    if app.contact.count() == 0:
+        app.contact.create(Contact(name="test_name"))
     app.contact.init_edition()
-    app.contact.edit_fields(Contact(name="test_name", middle_name="test_middle_name", surname="test_surname",
-                                    nickname="test_nickname", company="test_company", title="test_title",
-                                    telephone_home="79111111111", telephone_mobile="79222222222", telephone_work="", fax="",
-                                    email1="test@test.ru", email2="", email3="", homepage="test.com", bday="9",
-                                    bmonth="December", byear="1991", aday="1", amonth="May", ayear="2000", address="address",
-                                    home="home", note="edit test"))
+    app.contact.edit_fields(Contact(name="new_name", surname="new surname"))
     app.contact.submit_edition()
 
 
