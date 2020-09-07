@@ -85,3 +85,4 @@ class GroupHelper:
             id = wd.find_element_by_name("selected[]").get_attribute("value")
             groups.append(Group(name=text, id=id))
         return groups
+
