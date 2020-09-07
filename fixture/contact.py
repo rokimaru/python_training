@@ -83,20 +83,15 @@ class ContactHelper:
 
     def count(self):
         wd = self.app.wd
-        self.open_home_page()
+        self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
     def del_first_contact(self):
         wd = self.app.wd
-        self.open_home_page()
+        self.app.open_home_page()
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
-
-    def open_home_page(self):
-        wd = self.app.wd
-        if not (wd.current_url == "http://localhost/addressbook/"):
-            wd.get("http://localhost/addressbook/")
 
     def return_to_home_page(self):
         wd = self.app.wd
