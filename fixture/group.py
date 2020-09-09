@@ -19,6 +19,10 @@ class GroupHelper:
         wd = self.app.wd
         wd.find_element_by_name("selected[]").click()
 
+    def select_group_by_index(self, index):
+        wd = self.app.wd
+        wd.find_elements_by_name("selected[]")[index].click()
+
     def init_creation(self):
         wd = self.app.wd
         self.open_groups_page()
@@ -42,10 +46,10 @@ class GroupHelper:
             wd.find_element_by_name(field_name).clear()
             wd.find_element_by_name(field_name).send_keys(text)
 
-    def init_edition(self):
+    def init_edition_by_index(self, index):
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("edit").click()
 
     def submit_edition(self):
@@ -60,14 +64,20 @@ class GroupHelper:
         self.submit_creation()
 
     def edit_first_group(self, new_group_data):
-        self.init_edition()
+        self.edit_group_by_index(0, new_group_data)
+
+    def edit_group_by_index(self, index, new_group_data):
+        self.init_edition_by_index(index)
         self.edit_fields(new_group_data)
         self.submit_edition()
 
     def delete_first_group(self):
+        self.delete_group_by_index(0)
+
+    def delete_group_by_index(self, index):
         wd = self.app.wd
         self.open_groups_page()
-        self.select_first_group()
+        self.select_group_by_index(index)
         wd.find_element_by_name("delete").click()
         wd.find_element_by_css_selector("div.msgbox")
         self.return_to_groups_page()

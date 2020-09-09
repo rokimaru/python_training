@@ -63,9 +63,9 @@ class ContactHelper:
         self.return_to_home_page()
         self.contact_cache = None
 
-    def init_edition(self):
+    def init_edition_by_index(self, index):
         wd = self.app.wd
-        wd.find_element_by_xpath("/html/body/div/div[4]/form[2]/table/tbody/tr[2]/td[8]/a/img").click()
+        wd.find_elements_by_css_selector("[title*='Edit']")[index].click()
 
     def submit_edition(self):
         wd = self.app.wd
@@ -78,11 +78,9 @@ class ContactHelper:
         self.edit_fields(contact)
         self.submit_creation()
 
-    def edit(self, new_contact_data):
-        self.init_edition()
-        time.sleep(2)
+    def edit(self, index, new_contact_data):
+        self.init_edition_by_index(index)
         self.edit_fields(new_contact_data)
-        time.sleep(2)
         self.submit_edition()
 
     def count(self):
@@ -90,15 +88,18 @@ class ContactHelper:
         self.app.open_home_page()
         return len(wd.find_elements_by_name("selected[]"))
 
-    def del_first_contact(self):
+    def del_contact_by_index(self, index):
         wd = self.app.wd
         self.app.open_home_page()
-        wd.find_element_by_name("selected[]").click()
+        wd.find_elements_by_name("selected[]")[index].click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
         self.return_to_home_page()
         wd.find_element_by_css_selector("div.msgbox")
         self.contact_cache = None
+
+    def del_first_contact(self):
+        self.del_contact_by_index(0)
 
     def return_to_home_page(self):
         wd = self.app.wd
