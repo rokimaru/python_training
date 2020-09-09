@@ -10,6 +10,7 @@ class Application:
         self.session = SessionHelper(self)
         self.group = GroupHelper(self)
         self.contact = ContactHelper(self)
+        self.wd.implicitly_wait(2)
 
     def open_home_page(self):
         wd = self.wd

@@ -2,6 +2,8 @@ import time
 
 from selenium.webdriver.support.select import Select
 
+from model.contact import Contact
+
 
 class ContactHelper:
 
@@ -46,7 +48,7 @@ class ContactHelper:
     def change_field_value(self, field_name, text):
         wd = self.app.wd
         if text is not None:
-            if field_name in ["bday", "bmonth", "byear", "aday", "amonth", "ayear"]:
+            if field_name in ["bday", "bmonth", "aday", "amonth"]:
                 wd.find_element_by_name(field_name).click()
                 Select(wd.find_element_by_name(field_name)).select_by_visible_text(text)
                 wd.find_element_by_name(field_name).click()
@@ -58,7 +60,8 @@ class ContactHelper:
     def submit_creation(self):
         wd = self.app.wd
         wd.find_element_by_xpath("(//input[@name='submit'])[2]").click()
-        self.app.return_to_home_page()
+        self.return_to_home_page()
+        self.contact_cache = None
 
     def init_edition(self):
         wd = self.app.wd
@@ -67,7 +70,8 @@ class ContactHelper:
     def submit_edition(self):
         wd = self.app.wd
         wd.find_element_by_name("update").click()
-        self.app.return_to_home_page()
+        self.return_to_home_page()
+        self.contact_cache = None
 
     def create(self, contact):
         self.init_creation()
@@ -92,8 +96,27 @@ class ContactHelper:
         wd.find_element_by_name("selected[]").click()
         wd.find_element_by_xpath("//input[@value='Delete']").click()
         wd.switch_to_alert().accept()
+        self.return_to_home_page()
+        wd.find_element_by_css_selector("div.msgbox")
+        self.contact_cache = None
 
     def return_to_home_page(self):
         wd = self.app.wd
         if not (wd.current_url == "http://localhost/addressbook/"):
             wd.find_element_by_link_text("home page").click()
+
+    contact_cache = None
+
+    def get_contact_list(self):
+        if self.contact_cache is None:
+            wd = self.app.wd
+            self.app.open_home_page()
+            self.contact_cache = []
+            for element in wd.find_elements_by_xpath("//tr[contains(@name, 'entry')]"):
+                cells = element.find_elements_by_tag_name("td")
+                contact_id = element.find_element_by_name("selected[]").get_attribute("id")
+                surname = cells[1].text
+                name = cells[2].text
+                self.contact_cache.append(Contact(name=name, surname=surname, id=contact_id))
+        return list(self.contact_cache)
+
