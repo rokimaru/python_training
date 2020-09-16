@@ -1,4 +1,5 @@
 import time
+import re
 
 from selenium.webdriver.support.select import Select
 
@@ -37,13 +38,13 @@ class ContactHelper:
         self.change_field_value("aday", contact.aday)
         self.change_field_value("amonth", contact.amonth)
         self.change_field_value("ayear", contact.ayear)
-        self.change_field_value("home", contact.home)
+        self.change_field_value("home", contact.telephone_home_secondary)
         self.change_field_value("notes", contact.note)
 
     def upload_photo(self):
         wd = self.app.wd
         wd.find_element_by_name("photo").clear()
-        wd.find_element_by_name("photo").send_keys("C:\photo.jpg")
+        wd.find_element_by_name("photo").send_keys("C:\\photo.jpg")
 
     def change_field_value(self, field_name, text):
         wd = self.app.wd
@@ -66,6 +67,45 @@ class ContactHelper:
     def init_edition_by_index(self, index):
         wd = self.app.wd
         wd.find_elements_by_css_selector("[title*='Edit']")[index].click()
+
+    def open_contact_to_edit_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')[index]
+        cell = row.find_elements_by_tag_name('td')[7]
+        cell.find_element_by_tag_name('a').click()
+
+    def open_contact_view_by_index(self, index):
+        wd = self.app.wd
+        self.app.open_home_page()
+        row = wd.find_elements_by_name('entry')[index]
+        cell = row.find_elements_by_tag_name('td')[6]
+        cell.find_element_by_tag_name('a').click()
+
+    def get_contact_info_from_edit_page(self, index):
+        wd = self.app.wd
+        self.open_contact_to_edit_by_index(index)
+        name = wd.find_element_by_name('firstname').get_attribute('value')
+        surname = wd.find_element_by_name('lastname').get_attribute('value')
+        id = wd.find_element_by_name('id').get_attribute('value')
+        telephone_home = wd.find_element_by_name('home').get_attribute('value')
+        telephone_work = wd.find_element_by_name('work').get_attribute('value')
+        telephone_mobile = wd.find_element_by_name('mobile').get_attribute('value')
+        telephone_home_secondary = wd.find_element_by_name('phone2').get_attribute('value')
+        return Contact(name=name, surname=surname, id=id, telephone_home=telephone_home,
+                       telephone_mobile=telephone_mobile, telephone_work=telephone_work,
+                       telephone_home_secondary=telephone_home_secondary)
+
+    def get_contact_from_view_page(self, index):
+        wd = self.app.wd
+        self.open_contact_view_by_index(index)
+        text = wd.find_element_by_id('content').text
+        telephone_home = re.search('H: (.*)', text).group(1)
+        telephone_work = re.search('W: (.*)', text).group(1)
+        telephone_mobile = re.search('M: (.*)', text).group(1)
+        telephone_home_secondary = re.search('P: (.*)', text).group(1)
+        return Contact(telephone_home=telephone_home, telephone_mobile=telephone_mobile,
+                       telephone_work=telephone_work, telephone_home_secondary=telephone_home_secondary)
 
     def submit_edition(self):
         wd = self.app.wd
@@ -113,11 +153,12 @@ class ContactHelper:
             wd = self.app.wd
             self.app.open_home_page()
             self.contact_cache = []
-            for element in wd.find_elements_by_xpath("//tr[contains(@name, 'entry')]"):
-                cells = element.find_elements_by_tag_name("td")
-                contact_id = element.find_element_by_name("selected[]").get_attribute("id")
+            for row in wd.find_elements_by_name('entry'):
+                cells = row.find_elements_by_tag_name("td")
+                contact_id = cells[0].find_element_by_tag_name('input').get_attribute("value")
                 surname = cells[1].text
                 name = cells[2].text
-                self.contact_cache.append(Contact(name=name, surname=surname, id=contact_id))
+                all_phones = cells[5].text
+                self.contact_cache.append(Contact(name=name, surname=surname, id=contact_id,
+                                                  all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
-
