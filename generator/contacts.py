@@ -1,9 +1,9 @@
-import json
 import os
 import random
 import string
 import getopt
 import sys
+import jsonpickle
 from datetime import datetime
 from model.contact import Contact
 
@@ -66,5 +66,6 @@ test_data = [Contact(name=random_string('name ', 10), middle_name=random_string(
 
 file = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", f)
 
-with open(file, 'w') as out:
-    out.write(json.dumps(test_data, default=lambda x: x.__dict__, indent=2))
+with open(file, "w") as out:
+    jsonpickle.set_encoder_options("json", indent=2)
+    out.write(jsonpickle.encode(test_data))
