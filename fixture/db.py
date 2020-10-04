@@ -1,5 +1,4 @@
 import pymysql
-
 from model.contact import Contact
 from model.group import Group
 
@@ -10,7 +9,8 @@ class DbFixture:
         self.name = name
         self.user = user
         self.password = password
-        self.connection = pymysql.connect(host=host, database=name, user=user, password=password, autocommit=True)
+        self.connection = pymysql.connect(host=host, database=name, user=user, password=password)
+        self.connection.autocommit = True
 
     def get_group_list(self):
         lst = []
@@ -28,10 +28,13 @@ class DbFixture:
         lst = []
         cursor = self.connection.cursor()
         try:
-            cursor.execute("select id, firstname, lastname from addressbook")
+            cursor.execute("select id, firstname, lastname, address, work, home, mobile, phone2, email, email2, email3"
+                           " from addressbook where deprecated='0000-00-00 00:00:00'")
             for row in cursor:
-                (id, firstname, lastname) = row
-                lst.append(Contact(id=str(id), name=firstname, surname=lastname))
+                (id, firstname, lastname, address, work, home, mobile, phone2, email, email2, email3) = row
+                lst.append(Contact(id=str(id), firstname=firstname, lastname=lastname, address=address,
+                                   telephone_home=home, telephone_work=work, telephone_mobile=mobile,
+                                   telephone_home_secondary=phone2, email1=email, email2=email2, email3=email3))
         finally:
             cursor.close()
         return lst

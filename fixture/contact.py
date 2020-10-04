@@ -85,8 +85,8 @@ class ContactHelper:
     def get_contact_info_from_edit_page(self, index):
         wd = self.app.wd
         self.open_contact_to_edit_by_index(index)
-        name = wd.find_element_by_name('firstname').get_attribute('value')
-        surname = wd.find_element_by_name('lastname').get_attribute('value')
+        firstname = wd.find_element_by_name('firstname').get_attribute('value')
+        lastname = wd.find_element_by_name('lastname').get_attribute('value')
         id = wd.find_element_by_name('id').get_attribute('value')
         telephone_home = wd.find_element_by_name('home').get_attribute('value')
         telephone_work = wd.find_element_by_name('work').get_attribute('value')
@@ -96,7 +96,7 @@ class ContactHelper:
         email2 = wd.find_element_by_name('email2').get_attribute('value')
         email3 = wd.find_element_by_name('email3').get_attribute('value')
         address = wd.find_element_by_name('address').get_attribute('value')
-        return Contact(name=name, surname=surname, id=id, telephone_home=telephone_home,
+        return Contact(firstname=firstname, lastname=lastname, id=id, telephone_home=telephone_home,
                        telephone_mobile=telephone_mobile, telephone_work=telephone_work,
                        telephone_home_secondary=telephone_home_secondary, email1=email1,
                        email2=email2, email3=email3, address=address)
@@ -175,12 +175,12 @@ class ContactHelper:
             for row in wd.find_elements_by_name('entry'):
                 cells = row.find_elements_by_tag_name("td")
                 contact_id = cells[0].find_element_by_tag_name('input').get_attribute("value")
-                surname = cells[1].text
-                name = cells[2].text
+                lastname = cells[1].text
+                firstname = cells[2].text
                 address = cells[3].text
                 all_emails = cells[4].text
                 all_phones = cells[5].text
-                self.contact_cache.append(Contact(name=name, surname=surname, id=contact_id, address=address,
+                self.contact_cache.append(Contact(firstname=firstname, lastname=lastname, id=contact_id, address=address,
                                                   all_emails_from_home_page=all_emails,
                                                   all_phones_from_home_page=all_phones))
         return list(self.contact_cache)

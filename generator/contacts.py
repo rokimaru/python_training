@@ -53,8 +53,8 @@ def random_year():
     return str(random.choice(range(1900, 2020)))
 
 
-test_data = [Contact(name=random_string('name ', 10), middle_name=random_string('middle_name ', 10),
-                     surname=random_string('surname', 10), nickname=random_string('test_nickname ', 10),
+test_data = [Contact(firstname=random_string('name ', 10), middle_name=random_string('middle_name ', 10),
+                     lastname=random_string('surname', 10), nickname=random_string('test_nickname ', 10),
                      company=random_string('test_company ', 10), title=random_string('test_title ', 10),
                      telephone_home=random_telephone_number(), telephone_mobile=random_telephone_number(),
                      telephone_work=random_telephone_number(), fax=random_telephone_number(),

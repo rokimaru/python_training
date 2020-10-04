@@ -3,14 +3,14 @@ from sys import maxsize
 
 class Contact:
 
-    def __init__(self, name=None, middle_name=None, surname=None, nickname=None, company=None, photo_url=None,
+    def __init__(self, firstname=None, middle_name=None, lastname=None, nickname=None, company=None, photo_url=None,
                  title=None, telephone_home=None, telephone_mobile = None, telephone_work=None, fax=None, email1=None,
                  email2=None, email3=None, homepage=None, bday=None, bmonth=None, byear=None,
                  aday=None, amonth=None, ayear=None, address=None, telephone_home_secondary=None, note=None, id=None,
                  all_phones_from_home_page=None, all_emails_from_home_page=None):
-        self.name = name
+        self.firstname = firstname
         self.middle_name = middle_name
-        self.surname = surname
+        self.lastname = lastname
         self.nickname = nickname
         self.company = company
         self.photo_url = photo_url
@@ -37,11 +37,11 @@ class Contact:
         self.all_emails_from_home_page = all_emails_from_home_page
 
     def __repr__(self):
-        return '%s:%s:%s' % (self.id, self.name, self.surname)
+        return '%s:%s:%s' % (self.id, self.firstname, self.lastname)
 
     def __eq__(self, other):
         return (self.id is None or other.id is None or self.id == other.id) \
-               and self.name == other.name and self.surname == other.surname
+               and self.firstname == other.firstname and self.lastname == other.lastname
 
     def id_or_max(self):
         if self.id:
