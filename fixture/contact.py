@@ -184,3 +184,17 @@ class ContactHelper:
                                                   all_emails_from_home_page=all_emails,
                                                   all_phones_from_home_page=all_phones))
         return list(self.contact_cache)
+
+    def add_contact_by_id_in_group(self, user, group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_css_selector("input[value='%s']" % user.id).click()
+        wd.find_element_by_xpath("//select[@name='to_group']/option[@value='%s']" % group.id).click()
+        wd.find_element_by_name('add').click()
+
+    def del_contact_by_id_from_group(self, user, group):
+        wd = self.app.wd
+        self.app.open_home_page()
+        wd.find_element_by_xpath("//select[@name='group']/option[@value='%s']" % group.id).click()
+        wd.find_element_by_css_selector("input[value='%s']" % user.id).click()
+        wd.find_element_by_name('remove').click()

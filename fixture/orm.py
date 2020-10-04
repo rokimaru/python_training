@@ -1,4 +1,3 @@
-from datetime import datetime
 from pony.orm import *
 from pymysql.converters import decoders
 from model.contact import Contact
@@ -21,14 +20,22 @@ class ORMFixture:
         id = PrimaryKey(int, column='id')
         firstname = Optional(str, column='firstname')
         lastname = Optional(str, column='lastname')
+        address = Optional(str, column='address')
+        telephone_home = Optional(str, column='home')
+        telephone_mobile = Optional(str, column='mobile')
+        telephone_work = Optional(str, column='work')
+        telephone_home_secondary = Optional(str, column='phone2')
+        email = Optional(str, column='email')
+        email2 = Optional(str, column='email2')
+        email3 = Optional(str, column='email3')
         deprecated = Optional(str, column='deprecated')
-        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column='group_id', reverse='contacts', lazy=True)
+        groups = Set(lambda: ORMFixture.ORMGroup, table="address_in_groups", column='group_id',
+                     reverse='contacts', lazy=True)
 
     def __init__(self, host, name, user, password):
         self.db.bind('mysql', host=host, database=name, user=user, password=password, conv=decoders)
         self.db.generate_mapping()
         sql_debug(True)
-
 
     def convert_groups_to_model(self, groups):
         def convert(group):
