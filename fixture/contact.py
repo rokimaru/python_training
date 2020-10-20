@@ -16,9 +16,9 @@ class ContactHelper:
         wd.find_element_by_link_text("add new").click()
 
     def edit_fields(self, contact):
-        self.change_field_value("firstname", contact.name)
+        self.change_field_value("firstname", contact.firstname)
         self.change_field_value("middlename", contact.middle_name)
-        self.change_field_value("lastname", contact.surname)
+        self.change_field_value("lastname", contact.lastname)
         self.change_field_value("nickname", contact.nickname)
         self.upload_photo()
         self.change_field_value("title", contact.title)
