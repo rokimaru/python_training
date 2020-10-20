@@ -5,5 +5,5 @@ jsonpickle
 pony
 pymysql
 mysql-connector-python-rf
-pytest-allure-adapter
+
 
