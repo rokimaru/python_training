@@ -1,0 +1,37 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "test",
+    "children" : [ {
+      "name" : "test_phones",
+      "children" : [ {
+        "name" : "test_phones_on_home_page",
+        "uid" : "f89853306cad216f",
+        "parentUid" : "b4bb5a928abfc775cc5906580949262d",
+        "status" : "passed",
+        "time" : {
+          "start" : 1603199541297,
+          "stop" : 1603199541667,
+          "duration" : 370
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_phones_on_contact_view_page",
+        "uid" : "5d7a0843961b6c4d",
+        "parentUid" : "b4bb5a928abfc775cc5906580949262d",
+        "status" : "broken",
+        "time" : {
+          "start" : 1603199541682,
+          "stop" : 1603199541852,
+          "duration" : 170
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "b4bb5a928abfc775cc5906580949262d"
+    } ],
+    "uid" : "ff2b04dbb9c449a4d40723f51d841925"
+  } ]
+}

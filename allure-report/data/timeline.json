@@ -1,0 +1,37 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "WIN-BP2DE13KB1K",
+    "children" : [ {
+      "name" : "16504-MainThread",
+      "children" : [ {
+        "name" : "test_phones_on_home_page",
+        "uid" : "f89853306cad216f",
+        "parentUid" : "9133c81a7dc73bf8a853e6b2a8c7aec0",
+        "status" : "passed",
+        "time" : {
+          "start" : 1603199541297,
+          "stop" : 1603199541667,
+          "duration" : 370
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_phones_on_contact_view_page",
+        "uid" : "5d7a0843961b6c4d",
+        "parentUid" : "9133c81a7dc73bf8a853e6b2a8c7aec0",
+        "status" : "broken",
+        "time" : {
+          "start" : 1603199541682,
+          "stop" : 1603199541852,
+          "duration" : 170
+        },
+        "flaky" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "9133c81a7dc73bf8a853e6b2a8c7aec0"
+    } ],
+    "uid" : "d3548797580bfc77e4040a886e5e8461"
+  } ]
+}

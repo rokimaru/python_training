@@ -1,0 +1,29 @@
+{
+  "uid" : "b1a8273437954620fa374b796ffaacdd",
+  "name" : "behaviors",
+  "children" : [ {
+    "name" : "test_phones_on_home_page",
+    "uid" : "f89853306cad216f",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "passed",
+    "time" : {
+      "start" : 1603199541297,
+      "stop" : 1603199541667,
+      "duration" : 370
+    },
+    "flaky" : false,
+    "parameters" : [ ]
+  }, {
+    "name" : "test_phones_on_contact_view_page",
+    "uid" : "5d7a0843961b6c4d",
+    "parentUid" : "b1a8273437954620fa374b796ffaacdd",
+    "status" : "broken",
+    "time" : {
+      "start" : 1603199541682,
+      "stop" : 1603199541852,
+      "duration" : 170
+    },
+    "flaky" : false,
+    "parameters" : [ ]
+  } ]
+}

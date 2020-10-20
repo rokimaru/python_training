@@ -1,0 +1,21 @@
+[ {
+  "uid" : "f89853306cad216f",
+  "name" : "test_phones_on_home_page",
+  "time" : {
+    "start" : 1603199541297,
+    "stop" : 1603199541667,
+    "duration" : 370
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5d7a0843961b6c4d",
+  "name" : "test_phones_on_contact_view_page",
+  "time" : {
+    "start" : 1603199541682,
+    "stop" : 1603199541852,
+    "duration" : 170
+  },
+  "status" : "broken",
+  "severity" : "normal"
+} ]

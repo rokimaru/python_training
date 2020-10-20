@@ -1,0 +1,33 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "test.test_phones",
+    "children" : [ {
+      "name" : "test_phones_on_home_page",
+      "uid" : "f89853306cad216f",
+      "parentUid" : "16f61ae473d30e51c3f0ec64517e4c34",
+      "status" : "passed",
+      "time" : {
+        "start" : 1603199541297,
+        "stop" : 1603199541667,
+        "duration" : 370
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_phones_on_contact_view_page",
+      "uid" : "5d7a0843961b6c4d",
+      "parentUid" : "16f61ae473d30e51c3f0ec64517e4c34",
+      "status" : "broken",
+      "time" : {
+        "start" : 1603199541682,
+        "stop" : 1603199541852,
+        "duration" : 170
+      },
+      "flaky" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "test.test_phones"
+  } ]
+}

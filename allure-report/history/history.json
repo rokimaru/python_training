@@ -1,0 +1,41 @@
+{
+  "20082a8709fda6e17eb1a099fbf885ed" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 1,
+      "skipped" : 0,
+      "passed" : 0,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "5d7a0843961b6c4d",
+      "status" : "broken",
+      "statusDetails" : "AttributeError: 'NoneType' object has no attribute 'group'",
+      "time" : {
+        "start" : 1603199541682,
+        "stop" : 1603199541852,
+        "duration" : 170
+      }
+    } ]
+  },
+  "652f0d622d4d9b905f677cc3b1dc7942" : {
+    "statistic" : {
+      "failed" : 0,
+      "broken" : 0,
+      "skipped" : 0,
+      "passed" : 1,
+      "unknown" : 0,
+      "total" : 1
+    },
+    "items" : [ {
+      "uid" : "f89853306cad216f",
+      "status" : "passed",
+      "time" : {
+        "start" : 1603199541297,
+        "stop" : 1603199541667,
+        "duration" : 370
+      }
+    } ]
+  }
+}
